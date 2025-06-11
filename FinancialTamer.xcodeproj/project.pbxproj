@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		FCD82CB52DF9956B009AD561 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCD82C9C2DF99569009AD561 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCD82CA32DF99569009AD561;
+			remoteInfo = FinancialTamer;
+		};
+		FCD82CBF2DF9956B009AD561 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCD82C9C2DF99569009AD561 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCD82CA32DF99569009AD561;
+			remoteInfo = FinancialTamer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FCD82CA42DF99569009AD561 /* FinancialTamer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinancialTamer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCD82CB42DF9956B009AD561 /* FinancialTamerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinancialTamerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCD82CBE2DF9956B009AD561 /* FinancialTamerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinancialTamerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FCD82CA62DF99569009AD561 /* FinancialTamer */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FinancialTamer;
+			sourceTree = "<group>";
+		};
+		FCD82CB72DF9956B009AD561 /* FinancialTamerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FinancialTamerTests;
+			sourceTree = "<group>";
+		};
+		FCD82CC12DF9956B009AD561 /* FinancialTamerUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FinancialTamerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCD82CA12DF99569009AD561 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD82CB12DF9956B009AD561 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD82CBB2DF9956B009AD561 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCD82C9B2DF99569009AD561 = {
+			isa = PBXGroup;
+			children = (
+				FCD82CA62DF99569009AD561 /* FinancialTamer */,
+				FCD82CB72DF9956B009AD561 /* FinancialTamerTests */,
+				FCD82CC12DF9956B009AD561 /* FinancialTamerUITests */,
+				FCD82CA52DF99569009AD561 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCD82CA52DF99569009AD561 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCD82CA42DF99569009AD561 /* FinancialTamer.app */,
+				FCD82CB42DF9956B009AD561 /* FinancialTamerTests.xctest */,
+				FCD82CBE2DF9956B009AD561 /* FinancialTamerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FCD82CA32DF99569009AD561 /* FinancialTamer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCD82CC82DF9956B009AD561 /* Build configuration list for PBXNativeTarget "FinancialTamer" */;
+			buildPhases = (
+				FCD82CA02DF99569009AD561 /* Sources */,
+				FCD82CA12DF99569009AD561 /* Frameworks */,
+				FCD82CA22DF99569009AD561 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FCD82CA62DF99569009AD561 /* FinancialTamer */,
+			);
+			name = FinancialTamer;
+			packageProductDependencies = (
+			);
+			productName = FinancialTamer;
+			productReference = FCD82CA42DF99569009AD561 /* FinancialTamer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FCD82CB32DF9956B009AD561 /* FinancialTamerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCD82CCB2DF9956B009AD561 /* Build configuration list for PBXNativeTarget "FinancialTamerTests" */;
+			buildPhases = (
+				FCD82CB02DF9956B009AD561 /* Sources */,
+				FCD82CB12DF9956B009AD561 /* Frameworks */,
+				FCD82CB22DF9956B009AD561 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCD82CB62DF9956B009AD561 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FCD82CB72DF9956B009AD561 /* FinancialTamerTests */,
+			);
+			name = FinancialTamerTests;
+			packageProductDependencies = (
+			);
+			productName = FinancialTamerTests;
+			productReference = FCD82CB42DF9956B009AD561 /* FinancialTamerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FCD82CBD2DF9956B009AD561 /* FinancialTamerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCD82CCE2DF9956B009AD561 /* Build configuration list for PBXNativeTarget "FinancialTamerUITests" */;
+			buildPhases = (
+				FCD82CBA2DF9956B009AD561 /* Sources */,
+				FCD82CBB2DF9956B009AD561 /* Frameworks */,
+				FCD82CBC2DF9956B009AD561 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCD82CC02DF9956B009AD561 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FCD82CC12DF9956B009AD561 /* FinancialTamerUITests */,
+			);
+			name = FinancialTamerUITests;
+			packageProductDependencies = (
+			);
+			productName = FinancialTamerUITests;
+			productReference = FCD82CBE2DF9956B009AD561 /* FinancialTamerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCD82C9C2DF99569009AD561 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					FCD82CA32DF99569009AD561 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					FCD82CB32DF9956B009AD561 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = FCD82CA32DF99569009AD561;
+					};
+					FCD82CBD2DF9956B009AD561 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = FCD82CA32DF99569009AD561;
+					};
+				};
+			};
+			buildConfigurationList = FCD82C9F2DF99569009AD561 /* Build configuration list for PBXProject "FinancialTamer" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FCD82C9B2DF99569009AD561;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FCD82CA52DF99569009AD561 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FCD82CA32DF99569009AD561 /* FinancialTamer */,
+				FCD82CB32DF9956B009AD561 /* FinancialTamerTests */,
+				FCD82CBD2DF9956B009AD561 /* FinancialTamerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCD82CA22DF99569009AD561 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD82CB22DF9956B009AD561 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD82CBC2DF9956B009AD561 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCD82CA02DF99569009AD561 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD82CB02DF9956B009AD561 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD82CBA2DF9956B009AD561 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCD82CB62DF9956B009AD561 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCD82CA32DF99569009AD561 /* FinancialTamer */;
+			targetProxy = FCD82CB52DF9956B009AD561 /* PBXContainerItemProxy */;
+		};
+		FCD82CC02DF9956B009AD561 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCD82CA32DF99569009AD561 /* FinancialTamer */;
+			targetProxy = FCD82CBF2DF9956B009AD561 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FCD82CC62DF9956B009AD561 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FCD82CC72DF9956B009AD561 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FCD82CC92DF9956B009AD561 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FinancialTamer/Preview Content\"";
+				DEVELOPMENT_TEAM = BL67M76RZ8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.FinancialTamer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCD82CCA2DF9956B009AD561 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FinancialTamer/Preview Content\"";
+				DEVELOPMENT_TEAM = BL67M76RZ8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.FinancialTamer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FCD82CCC2DF9956B009AD561 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BL67M76RZ8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.FinancialTamerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinancialTamer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FinancialTamer";
+			};
+			name = Debug;
+		};
+		FCD82CCD2DF9956B009AD561 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BL67M76RZ8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.FinancialTamerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinancialTamer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FinancialTamer";
+			};
+			name = Release;
+		};
+		FCD82CCF2DF9956B009AD561 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BL67M76RZ8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.FinancialTamerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FinancialTamer;
+			};
+			name = Debug;
+		};
+		FCD82CD02DF9956B009AD561 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BL67M76RZ8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.FinancialTamerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FinancialTamer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCD82C9F2DF99569009AD561 /* Build configuration list for PBXProject "FinancialTamer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCD82CC62DF9956B009AD561 /* Debug */,
+				FCD82CC72DF9956B009AD561 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCD82CC82DF9956B009AD561 /* Build configuration list for PBXNativeTarget "FinancialTamer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCD82CC92DF9956B009AD561 /* Debug */,
+				FCD82CCA2DF9956B009AD561 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCD82CCB2DF9956B009AD561 /* Build configuration list for PBXNativeTarget "FinancialTamerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCD82CCC2DF9956B009AD561 /* Debug */,
+				FCD82CCD2DF9956B009AD561 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCD82CCE2DF9956B009AD561 /* Build configuration list for PBXNativeTarget "FinancialTamerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCD82CCF2DF9956B009AD561 /* Debug */,
+				FCD82CD02DF9956B009AD561 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCD82C9C2DF99569009AD561 /* Project object */;
+}
