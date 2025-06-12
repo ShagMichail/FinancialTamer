@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct BankAccount {
+    let id: Int
+    let name: String
+    let balance: Decimal
+    let currency: String
+}
