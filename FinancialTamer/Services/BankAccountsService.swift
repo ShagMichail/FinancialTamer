@@ -11,9 +11,12 @@ final class BankAccountsService {
     private var mockAccounts: [BankAccount] = [
         BankAccount(
             id: 1,
+            userId: 1,
             name: "Основной счет",
             balance: Decimal(10000.00),
-            currency: "RUB"
+            currency: "RUB",
+            createdAt: Date(),
+            updatedAt: Date()
         )
     ]
     

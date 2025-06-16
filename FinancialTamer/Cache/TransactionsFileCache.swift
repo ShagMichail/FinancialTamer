@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import os.log
 
-class TransactionsFileCache {
+final class TransactionsFileCache {
 
     private(set) var transactions: [Transaction] = []
     private let fileURL: URL
@@ -45,9 +46,9 @@ class TransactionsFileCache {
             do {
                 let data = try JSONSerialization.data(withJSONObject: transactionsJSON, options: [.prettyPrinted])
                 try data.write(to: self.fileURL)
-                print("Transactions saved successfully to \(self.fileURL.path)")
+                os_log("Transactions saved successfully to %@", log: .default, type: .info, self.fileURL.path)
             } catch {
-                print("Failed to save transactions: \(error.localizedDescription)")
+                os_log("Failed to save transactions: %@", log: .default, type: .error, error.localizedDescription)
             }
         }
     }
@@ -55,7 +56,7 @@ class TransactionsFileCache {
     func loadTransactions() {
         queue.async(flags: .barrier) {
             guard FileManager.default.fileExists(atPath: self.fileURL.path) else {
-                print("No existing file at \(self.fileURL.path)")
+                os_log("No existing file at %@", log: .default, type: .error, self.fileURL.path)
                 return
             }
             
@@ -76,9 +77,9 @@ class TransactionsFileCache {
                 }
                 
                 self.transactions = Array(uniqueTransactions.values)
-                print("Loaded \(self.transactions.count) transactions from \(self.fileURL.path)")
+                os_log("Loaded %d transactions from %@", log: .default, type: .info, self.transactions.count, self.fileURL.path)
             } catch {
-                print("Failed to load transactions: \(error.localizedDescription)")
+                os_log("Failed to load transactions: %@", log: .default, type: .error, error.localizedDescription)
             }
         }
     }
