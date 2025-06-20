@@ -13,7 +13,7 @@ final class BankAccountsService {
             id: 1,
             userId: 1,
             name: "Основной счет",
-            balance: Decimal(10000.00),
+            balance: Decimal(10000),
             currency: "RUB",
             createdAt: Date(),
             updatedAt: Date()

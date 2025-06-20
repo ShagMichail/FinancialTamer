@@ -7,107 +7,75 @@
 
 import SwiftUI
 
-//
-struct RockGroup {
-    var groupName: String
-    var groupNameSubtitle: String?
-    var groupImageName: String
-    var cost: String
-}
-
-struct RockGroupData {
-    static let data = [
-        RockGroup(groupName: "The Jimi Hendrix", groupNameSubtitle: "sdfsdf", groupImageName: "articlesTab", cost: "100000 %"),
-        RockGroup(groupName: "Led Zeppelin", groupImageName: "articlesTab", cost: "100000 %"),
-        RockGroup(groupName: "Bob Dylan", groupNameSubtitle: "sdfsdf", groupImageName: "articlesTab", cost: "100000 %")
-    ]
-}
-
-
-
 struct TransactionsListView: View {
     
-//    var transactionsService: TransactionsService
-//    var rockGroups = RockGroupData.data
+    @ObservedObject private var viewModel: TransactionsViewModel
+    var title: String
     
-    @StateObject private var viewModel: TransactionsViewModel
-    
-//    var transactions: [Transaction] = []
-    
-    init(service: TransactionsService) {
-            _viewModel = StateObject(wrappedValue: TransactionsViewModel(service: service))
-        }
+    init(viewModel: TransactionsViewModel, title: String) {
+        self.viewModel = viewModel
+        self.title = title
+    }
     
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 0) {
-                // Секция "Расходы сегодня"
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Расходы сегодня")
+
+        ZStack {
+            List {
+                Section {
+                    ListRowView(
+                        categoryName: "Всего",
+                        transactionAmount: viewModel.totalAmountToday,
+                        needChevron: false
+                    )
+                } header: {
+                    Text(title)
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(.black)
                         .padding(.bottom, 16)
-                        .padding(.horizontal, 16)
-                    
-                    Spacer()
-                    
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Всего")
-                                .font(.system(size: 17, weight: .regular))
-                        }
-                        Spacer()
-                        Text(viewModel.totalAmountToday)
-                            .font(.system(size: 17, weight: .regular))
-                    }
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.white)
-                            .padding(.horizontal, 16)
-                    )
+                        .textCase(nil)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .listRowBackground(Color.clear)
                 }
                 
-                Spacer()
-                
-                Text("ОПЕРАЦИИ")
-                    .font(.system(size: 13, weight: .regular))
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal, 32)
-                    .padding(.top, 16)
-                    .padding(.bottom, 8)
-                
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(viewModel.transactions.indices, id: \.self) { index in
+                Section {
+                    ForEach(viewModel.displayedTransactions.indices, id: \.self) { index in
+                        let transaction = viewModel.displayedTransactions[index]
+                        let category = viewModel.category(for: transaction)
                         VStack(spacing: 0) {
-                            TransactionsListRow(transaction: viewModel.transactions[index])
-                            
-                            if index != viewModel.transactions.count - 1 {
-                                Divider()
-                                    .padding(.leading, 72)
-                                    .padding(.trailing, 16)
-                            }
+                            ListRowView(
+                                emoji: category.map { String($0.emoji) } ?? "❓",
+                                categoryName: category?.name ?? "Не известно",
+                                transactionComment: transaction.comment.count != 0 ? transaction.comment : nil,
+                                transactionAmount: NumberFormatter.currency.string(from: NSDecimalNumber(decimal: transaction.amount)) ?? "",
+                                needChevron: true
+                            )
+                        }
+                        .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                        .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+                            return viewDimensions[.listRowSeparatorLeading] + 46
                         }
                     }
+                    
+                } header: {
+                    Text("ОПЕРАЦИИ")
+                        .font(.system(size: 13, weight: .regular))
+                        .foregroundColor(.secondary)
+                        .padding(.top, 16)
+                        .padding(.bottom, 8)
                 }
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .padding(.horizontal, 16)
-                )
             }
-        }
-        .background(Color(.systemGroupedBackground))
-        .task {
-            await viewModel.loadTransactions()
-        }
-        .refreshable {
-            await viewModel.loadTransactions()
+            .listSectionSpacing(0)
+            .scrollIndicators(.hidden)
+            .task {
+                await viewModel.loadTransactions()
+            }
+            .refreshable {
+                await viewModel.loadTransactions()
+            }
         }
     }
 }
 
 #Preview {
-//    TransactionsListView()
+    TransactionsListView(viewModel: TransactionsViewModel(transactionsService: TransactionsService(), categoriesService: CategoriesService(), selectedDirection: .outcome), title: "Расходы сегодня")
 }
