@@ -100,6 +100,7 @@ struct MyHistoryView: View {
                             categoryName: category?.name ?? "Не известно",
                             transactionComment: transaction.comment.count != 0 ? transaction.comment : nil,
                             transactionAmount: NumberFormatter.currency.string(from: NSDecimalNumber(decimal: transaction.amount)) ?? "",
+                            transactionDate: dateFormator(date: transaction.transactionDate),
                             needChevron: true
                         )
                     }
@@ -173,6 +174,12 @@ struct MyHistoryView: View {
                 startDate = calendar.date(from: startComponents) ?? newValue
             }
         }
+    }
+    
+    private func dateFormator(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
     }
 }
 

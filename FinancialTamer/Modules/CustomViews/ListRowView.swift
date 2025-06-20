@@ -12,6 +12,7 @@ struct ListRowView: View {
     private var categoryName: String
     private var transactionComment: String?
     private var transactionAmount: String
+    private var transactionDate: String?
     private var needChevron: Bool
     
     init(
@@ -19,12 +20,14 @@ struct ListRowView: View {
         categoryName: String,
         transactionComment: String? = nil,
         transactionAmount: String,
+        transactionDate: String? = nil,
         needChevron: Bool
     ) {
         self.emoji = emoji
         self.categoryName = categoryName
         self.transactionComment = transactionComment
         self.transactionAmount = transactionAmount
+        self.transactionDate = transactionDate
         self.needChevron = needChevron
     }
     
@@ -48,9 +51,14 @@ struct ListRowView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 10)
             
-            Text(transactionAmount)
-                .font(.system(size: 17, weight: .regular))
-            
+            VStack(alignment: .trailing) {
+                Text(transactionAmount)
+                    .font(.system(size: 17, weight: .regular))
+                if let transactionDate = transactionDate {
+                    Text(transactionDate)
+                        .font(.system(size: 17, weight: .regular))
+                }
+            }
             if needChevron {
                 Image(systemName: "chevron.right")
                     .resizable()
@@ -58,7 +66,7 @@ struct ListRowView: View {
                     .foregroundStyle(.gray)
             }
         }
-        .frame(maxWidth: .infinity, idealHeight: 30)
+        .frame(maxWidth: .infinity, idealHeight: 35)
     }
 }
 

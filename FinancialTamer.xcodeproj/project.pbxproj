@@ -187,11 +187,12 @@
 				};
 			};
 			buildConfigurationList = FCD82C9F2DF99569009AD561 /* Build configuration list for PBXProject "FinancialTamer" */;
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = FCD82C9B2DF99569009AD561;
 			minimizedProjectReferenceProxies = 1;
