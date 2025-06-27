@@ -34,9 +34,13 @@ struct ListRowView: View {
     var body: some View {
         HStack {
             if let emoji = emoji {
-                Text(emoji)
+                Circle()
+                    .fill(Color.accentColor.opacity(0.2))
                     .frame(width: 22, height: 22)
-                    .padding(.trailing, 16)
+                    .overlay(Text(String(emoji))
+                        .font(.system(size: 12))
+                    )
+                    .padding(.trailing, 8)
             }
             
             VStack(alignment: .leading) {

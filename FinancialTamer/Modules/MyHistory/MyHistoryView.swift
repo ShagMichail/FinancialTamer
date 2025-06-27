@@ -7,31 +7,10 @@
 
 import SwiftUI
 
-enum TypeDate {
-    case start
-    case end
-}
-
 struct MyHistoryView: View {
     @Environment(\.dismiss) private var dismiss
     
     @ObservedObject private var viewModel: MyHistoryViewModel
-    
-    @State private var startDate: Date = {
-        let calendar = Calendar.current
-        let today = Date()
-        let monthAgo = calendar.date(byAdding: .month, value: -1, to: today) ?? today
-        let components = calendar.dateComponents([.year, .month, .day], from: monthAgo)
-        return calendar.date(from: components) ?? today
-    }()
-    
-    @State private var endDate: Date = {
-        let calendar = Calendar.current
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
-        components.hour = 23
-        components.minute = 59
-        return calendar.date(from: components) ?? Date()
-    }()
     
     init(viewModel: MyHistoryViewModel) {
         self.viewModel = viewModel
@@ -43,21 +22,21 @@ struct MyHistoryView: View {
                 HStack {
                     Text("Начало")
                     Spacer()
-                    CustomPickerView(date: $startDate)
+                    CustomPickerView(date: $viewModel.startDate)
                 }
-                .onChange(of: startDate) { oldValue, newValue in
-                    changeDate(newValue: newValue, typeDate: .start)
-                    Task { await viewModel.loadData(from: startDate, to: endDate) }
+                .onChange(of: viewModel.startDate) { _, newValue in
+                    viewModel.changeDate(newValue: newValue, typeDate: .start)
+                    Task { await viewModel.loadData() }
                 }
                 
                 HStack {
                     Text("Конец")
                     Spacer()
-                    CustomPickerView(date: $endDate)
+                    CustomPickerView(date: $viewModel.endDate)
                 }
-                .onChange(of: endDate) { oldValue, newValue in
-                    changeDate(newValue: newValue, typeDate: .end)
-                    Task { await viewModel.loadData(from: startDate, to: endDate) }
+                .onChange(of: viewModel.endDate) { _, newValue in
+                    viewModel.changeDate(newValue: newValue, typeDate: .end)
+                    Task { await viewModel.loadData() }
                 }
                 
                 HStack {
@@ -144,38 +123,10 @@ struct MyHistoryView: View {
             }
         }
         .task {
-            await viewModel.loadData(from: startDate, to: endDate)
+            await viewModel.loadData()
         }
     }
-    
-    private func changeDate(newValue: Date, typeDate: TypeDate) {
-        let calendar = Calendar.current
-        var components = calendar.dateComponents([.year, .month, .day], from: newValue)
-        
-        switch typeDate {
-        case .start:
-            components.hour = 00
-            components.minute = 00
-            startDate = calendar.date(from: components) ?? newValue
-            if startDate > endDate {
-                var endComponents = calendar.dateComponents([.year, .month, .day], from: newValue)
-                endComponents.hour = 23
-                endComponents.minute = 59
-                endDate = calendar.date(from: endComponents) ?? newValue
-            }
-        case .end:
-            components.hour = 23
-            components.minute = 59
-            endDate = calendar.date(from: components) ?? newValue
-            if endDate < startDate {
-                var startComponents = calendar.dateComponents([.year, .month, .day], from: newValue)
-                startComponents.hour = 00
-                startComponents.minute = 00
-                startDate = calendar.date(from: startComponents) ?? newValue
-            }
-        }
-    }
-    
+
     private func dateFormator(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
