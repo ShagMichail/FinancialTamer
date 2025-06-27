@@ -5,4 +5,8 @@
 //  Created by Михаил Шаговитов on 26.06.2025.
 //
 
-import Foundation
+import SwiftUI
+
+extension UIDevice {
+    static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
+}
