@@ -32,6 +32,42 @@ final class CategoriesService {
             name: "Подарок",
             emoji: "🎁",
             direction: .income
+        ),
+        Category(
+            id: 4,
+            name: "Спорт",
+            emoji: "🎁",
+            direction: .income
+        ),
+        Category(
+            id: 4,
+            name: "Квартира",
+            emoji: "🎁",
+            direction: .income
+        ),
+        Category(
+            id: 4,
+            name: "Нефть",
+            emoji: "🎁",
+            direction: .income
+        ),
+        Category(
+            id: 4,
+            name: "Золото",
+            emoji: "🎁",
+            direction: .income
+        ),
+        Category(
+            id: 4,
+            name: "Машины",
+            emoji: "🎁",
+            direction: .income
+        ),
+        Category(
+            id: 4,
+            name: "Одежда",
+            emoji: "🎁",
+            direction: .income
         )
     ]
     

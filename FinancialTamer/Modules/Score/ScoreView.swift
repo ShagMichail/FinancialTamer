@@ -66,12 +66,17 @@ struct ScoreView: View {
                                     .focused($isFocused)
                                     .font(.system(size: 17, weight: .regular))
                                     .multilineTextAlignment(.trailing)
-                                
                             } else {
-                                Text(viewModel.displayBalance)
-                                    .font(.system(size: 17, weight: .regular))
-                                    .foregroundStyle(Color.black.opacity(stateScreen == .edit ? 1 : 0.5))
-                                    .spoiler(isOn: $spoilerVisible)
+                                HStack {
+                                    Text(viewModel.displayBalance)
+                                        .font(.system(size: 17, weight: .regular))
+                                        .foregroundStyle(Color.black.opacity(stateScreen == .edit ? 1 : 0.5))
+                                    if stateScreen == .edit {
+                                        Text(viewModel.selectedCurrency.symbol)
+                                            .font(.system(size: 17, weight: .regular))
+                                            .foregroundStyle(Color.black)
+                                    }
+                                }.spoiler(isOn: $spoilerVisible)
                             }
                         }
                         .frame(maxWidth: .infinity, idealHeight: 35)
