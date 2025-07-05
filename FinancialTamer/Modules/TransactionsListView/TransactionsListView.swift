@@ -61,10 +61,9 @@ struct TransactionsListView: View {
                         .font(.system(size: 13, weight: .regular))
                         .foregroundColor(.secondary)
                         .padding(.top, 16)
-                        .padding(.bottom, 8)
                 }
             }
-            .listSectionSpacing(0)
+            .listSectionSpacing(-20)
             .scrollIndicators(.hidden)
             .task {
                 await viewModel.loadTransactions()

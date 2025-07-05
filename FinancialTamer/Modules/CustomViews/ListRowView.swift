@@ -11,7 +11,7 @@ struct ListRowView: View {
     private var emoji: String?
     private var categoryName: String
     private var transactionComment: String?
-    private var transactionAmount: String
+    private var transactionAmount: String?
     private var transactionDate: String?
     private var needChevron: Bool
     
@@ -19,7 +19,7 @@ struct ListRowView: View {
         emoji: String? = nil,
         categoryName: String,
         transactionComment: String? = nil,
-        transactionAmount: String,
+        transactionAmount: String? = nil,
         transactionDate: String? = nil,
         needChevron: Bool
     ) {
@@ -56,8 +56,10 @@ struct ListRowView: View {
             .padding(.vertical, 10)
             
             VStack(alignment: .trailing) {
-                Text(transactionAmount)
-                    .font(.system(size: 17, weight: .regular))
+                if let transactionAmount = transactionAmount {
+                    Text(transactionAmount)
+                        .font(.system(size: 17, weight: .regular))
+                }
                 if let transactionDate = transactionDate {
                     Text(transactionDate)
                         .font(.system(size: 17, weight: .regular))
