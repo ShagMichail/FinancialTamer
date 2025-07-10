@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IncomeHistoryView: View {
     @StateObject private var viewModel: MyHistoryViewModel
+    private var analysisViewModel: AnalysisViewModel
     
     init() {
         let transactionsService = TransactionsService()
@@ -20,10 +21,11 @@ struct IncomeHistoryView: View {
                 selectedDirection: .income
             )
         )
+        analysisViewModel = AnalysisViewModel(transactionsService: transactionsService, categoriesService: categoriesService, selectedDirection: .income)
     }
     
     var body: some View {
-        MyHistoryView(viewModel: viewModel)
+        MyHistoryView(viewModel: viewModel, analysisViewModel: analysisViewModel)
     }
 }
 

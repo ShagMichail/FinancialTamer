@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct CategorySummary {
+    let category: Category
+    let totalAmount: Decimal
+    let percentage: Int
+    let transactions: [Transaction]
+}

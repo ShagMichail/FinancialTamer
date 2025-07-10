@@ -50,8 +50,8 @@ final class MyHistoryViewModel: ObservableObject {
         return calendar.date(from: components) ?? Date()
     }()
     
-    private let transactionsService: TransactionsService
-    private let categoriesService: CategoriesService
+    let transactionsService: TransactionsService
+    let categoriesService: CategoriesService
     
     var sortedTransactions: [Transaction] {
         switch sortType {

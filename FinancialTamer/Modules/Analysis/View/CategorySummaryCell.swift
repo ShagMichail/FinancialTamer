@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class TransactionCell: UITableViewCell {
+final class CategorySummaryCell: UITableViewCell {
     private var emojiLabel = UILabel()
     private var categoryLabel: UILabel = {
         var label = UILabel()

@@ -7,32 +7,18 @@
 
 import SwiftUI
 
-struct MyHistoryViewControllerWrapper: UIViewControllerRepresentable {
-    let viewModel: MyHistoryViewModel
+struct AnalysisViewControllerWrapper: UIViewControllerRepresentable {
+    @Environment(\.dismiss) private var dismiss
+    let viewModel: AnalysisViewModel
     
-    func makeUIViewController(context: Context) -> AnalysisViewController {
+    func makeUIViewController(context: Context) -> UIViewController {
         let vc = AnalysisViewController(viewModel: viewModel)
-        return vc
+        vc.onDismiss = { dismiss() }
+        let navController = UINavigationController(rootViewController: vc)
+        return navController
     }
     
-//    func makeUIViewController(context: Context) -> AnalysisViewController {
-//            let viewController = AnalysisViewController(viewModel: viewModel)
-//            viewController.title = title
-//            viewController.view.backgroundColor = backgroundColor
-//            
-//            let navController = UINavigationController(rootViewController: viewController)
-            
-            // Настройка navigationBar
-//            let appearance = UINavigationBarAppearance()
-//            appearance.backgroundColor = .systemBlue
-//            navController.navigationBar.standardAppearance = appearance
-//            navController.navigationBar.scrollEdgeAppearance = appearance
-//            navController.navigationBar.tintColor = .white
-            
-//            return viewController
-//        }
-    
-    func updateUIViewController(_ uiViewController: AnalysisViewController, context: Context) {
-        // Обновление контроллера при необходимости
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        //
     }
 }
