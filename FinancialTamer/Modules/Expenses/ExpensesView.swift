@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ExpensesView: View {
     @StateObject private var viewModel: TransactionsViewModel
+    @State private var showCreateTransaction = false
+    @State private var editingTransaction: Transaction?
     
     let transactionsService = TransactionsService()
-    let categoriesService = CategoriesService()
     
     init() {
         let transactionsService = TransactionsService()
@@ -30,13 +31,13 @@ struct ExpensesView: View {
             ZStack {
                 TransactionsListView(
                     viewModel: viewModel,
+                    editingTransaction: $editingTransaction, 
                     title: "Расходы сегодня"
                 )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink {
                             ExpensesHistoryView()
-                            
                         } label: {
                             Image("time")
                                 .resizable()
@@ -49,8 +50,8 @@ struct ExpensesView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink {
-                            NewExpensesView()
+                        Button {
+                            showCreateTransaction = true
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 28).frame(width: 56, height: 56)
@@ -63,6 +64,41 @@ struct ExpensesView: View {
                         }.padding(.trailing, 16)
                     }.padding(.bottom, 28)
                 }
+            }
+            .fullScreenCover(isPresented: $showCreateTransaction) {
+                CreateTransactionView(
+                    viewModel: CreateTransactionViewModel(
+                        direction: viewModel.selectedDirection,
+                        mainAccountId: 1,
+                        categories: viewModel.categories,
+                        transactions: viewModel.allTransactions,
+                        transactionsService: transactionsService
+                    ),
+                    onSave: {
+                        showCreateTransaction = false
+                        Task {
+                            await viewModel.loadTransactions()
+                        }
+                    }
+                )
+            }
+            .fullScreenCover(item: $editingTransaction) { transaction in
+                CreateTransactionView(
+                    viewModel: CreateTransactionViewModel(
+                        direction: viewModel.selectedDirection,
+                        mainAccountId: 1,
+                        categories: viewModel.categories,
+                        transactions: viewModel.allTransactions,
+                        transactionToEdit: transaction,
+                        transactionsService: transactionsService
+                    ),
+                    onSave: {
+                        editingTransaction = nil
+                        Task {
+                            await viewModel.loadTransactions()
+                        }
+                    }
+                )
             }
             
         }
