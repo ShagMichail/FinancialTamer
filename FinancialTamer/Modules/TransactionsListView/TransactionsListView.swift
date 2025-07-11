@@ -9,13 +9,10 @@ import SwiftUI
 
 struct TransactionsListView: View {
     
-    @ObservedObject private var viewModel: TransactionsViewModel
-    var title: String
+    @ObservedObject var viewModel: TransactionsViewModel
+    @Binding var editingTransaction: Transaction?
     
-    init(viewModel: TransactionsViewModel, title: String) {
-        self.viewModel = viewModel
-        self.title = title
-    }
+    var title: String
     
     var body: some View {
 
@@ -51,6 +48,9 @@ struct TransactionsListView: View {
                             )
                         }
                         .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                        .onTapGesture {
+                            editingTransaction = transaction
+                        }
                     }
                     
                 } header: {
@@ -70,8 +70,4 @@ struct TransactionsListView: View {
             }
         }
     }
-}
-
-#Preview {
-    TransactionsListView(viewModel: TransactionsViewModel(transactionsService: TransactionsService(), categoriesService: CategoriesService(), selectedDirection: .outcome), title: "Расходы сегодня")
 }

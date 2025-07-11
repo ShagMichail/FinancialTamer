@@ -1,40 +1,35 @@
 //
-//  MyHistoryViewModel.swift
+//  AnalysisViewModel.swift
 //  FinancialTamer
 //
-//  Created by Михаил Шаговитов on 18.06.2025.
+//  Created by Михаил Шаговитов on 10.07.2025.
 //
 
-import SwiftUI
-import OSLog
+import UIKit
+import os.log
 
-enum SortType: String, CaseIterable, Identifiable {
-    case date = "По дате"
-    case amount = "По сумме"
-    var id: String { self.rawValue }
+protocol AnalysisViewModelDelegate: AnyObject {
+    func dataDidUpdate()
+    func shouldUpdateDateCells()
 }
 
-enum TypeDate {
-    case start
-    case end
-}
-
-@MainActor
-final class MyHistoryViewModel: ObservableObject {
-    @Published var selectedDirection: Direction = .outcome {
+final class AnalysisViewModel {
+    var selectedDirection: Direction = .outcome {
         didSet {
             filterTransactions()
+            delegate?.dataDidUpdate()
         }
     }
-    @Published var totalAmount: Decimal = 0
-    @Published var allTransactions: [Transaction] = []
-    @Published var displayedTransactions: [Transaction] = []
-    @Published var categories: [Category] = []
-    @Published var isLoading = false
-    @Published var error: Error?
-    @Published var sortType: SortType = .date
+    var totalAmount: Decimal = 0
+    var allTransactions: [Transaction] = []
+    var displayedTransactions: [Transaction] = []
+    var categories: [Category] = []
+    private(set) var categorySummaries: [CategorySummary] = []
+    var isLoading = false
+    var error: Error?
+    var sortType: SortType = .date
     
-    @Published var startDate: Date = {
+    var startDate: Date = {
         let calendar = Calendar.current
         let today = Date()
         let monthAgo = calendar.date(byAdding: .month, value: -1, to: today) ?? today
@@ -42,7 +37,7 @@ final class MyHistoryViewModel: ObservableObject {
         return calendar.date(from: components) ?? today
     }()
     
-    @Published var endDate: Date = {
+    var endDate: Date = {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
         components.hour = 23
@@ -50,35 +45,27 @@ final class MyHistoryViewModel: ObservableObject {
         return calendar.date(from: components) ?? Date()
     }()
     
-    let transactionsService: TransactionsService
-    let categoriesService: CategoriesService
+    weak var delegate: AnalysisViewModelDelegate?
+    private let transactionsService: TransactionsService
+    private let categoriesService: CategoriesService
     
-    var sortedTransactions: [Transaction] {
-        switch sortType {
-        case .date:
-            return displayedTransactions.sorted { $0.transactionDate > $1.transactionDate }
-        case .amount:
-            return displayedTransactions.sorted { $0.amount > $1.amount }
-        }
-    }
-    
-    init(transactionsService: TransactionsService, categoriesService: CategoriesService,  selectedDirection: Direction) {
+    init(transactionsService: TransactionsService, categoriesService: CategoriesService, selectedDirection: Direction) {
         self.transactionsService = transactionsService
         self.categoriesService = categoriesService
         self.selectedDirection = selectedDirection
     }
     
+    @MainActor
     func loadData() async {
         isLoading = true
         defer { isLoading = false }
         
         do {
-            let period = DateInterval(start: startDate, end: endDate)
-            async let transactionsTask = transactionsService.getTransactions(for: period)
+            async let transactionsTask = transactionsService.getTransactions(for: DateInterval(start: startDate, end: endDate))
             async let categoriesTask = categoriesService.categories()
             
-            let (transactions, categories) = await (try transactionsTask, try categoriesTask)
-                        
+            let (transactions, categories) = try await (transactionsTask, categoriesTask)
+            
             self.allTransactions = transactions
             self.categories = categories
             self.displayedTransactions = transactions
@@ -94,14 +81,45 @@ final class MyHistoryViewModel: ObservableObject {
         categories.first { $0.id == transaction.categoryId }
     }
     
-    private func calculateTotalAmount() -> Decimal {
-        displayedTransactions.reduce(0) { $0 + $1.amount }
-    }
-    
     private func filterTransactions() {
         displayedTransactions = allTransactions.filter { transaction in
             guard let category = category(for: transaction) else { return false }
             return category.direction == selectedDirection
+        }
+        totalAmount = calculateTotalAmount()
+        
+        let grouped = Dictionary(grouping: displayedTransactions) { $0.categoryId }
+            .compactMapValues { transactions -> CategorySummary? in
+                guard let categoryId = transactions.first?.categoryId,
+                      let category = categories.first(where: { $0.id == categoryId }),
+                      !transactions.isEmpty else { return nil }
+                
+                let categoryTotal = transactions.reduce(0) { $0 + $1.amount }
+                let percentage = totalAmount > 0 ?
+                Int(Double(truncating: (categoryTotal / totalAmount * 100) as NSNumber).rounded(toPlaces: 0)) : 0
+                
+                return CategorySummary(
+                    category: category,
+                    totalAmount: categoryTotal,
+                    percentage: percentage,
+                    transactions: transactions
+                )
+            }
+        
+        categorySummaries = Array(grouped.values)
+    }
+    
+    private func calculateTotalAmount() -> Decimal {
+        displayedTransactions.reduce(0) { $0 + $1.amount }
+    }
+    
+    func sortCategories(sortType: SortType) {
+        switch sortType {
+        case .date:
+            // Непонятно как сортировать сумманые категории по времени
+            categorySummaries
+        case .amount:
+            categorySummaries.sort { $0.totalAmount > $1.totalAmount }
         }
     }
     
@@ -119,6 +137,7 @@ final class MyHistoryViewModel: ObservableObject {
                 endComponents.hour = 23
                 endComponents.minute = 59
                 endDate = calendar.date(from: endComponents) ?? newValue
+                delegate?.shouldUpdateDateCells()
             }
         case .end:
             components.hour = 23
@@ -129,7 +148,10 @@ final class MyHistoryViewModel: ObservableObject {
                 startComponents.hour = 00
                 startComponents.minute = 00
                 startDate = calendar.date(from: startComponents) ?? newValue
+                delegate?.shouldUpdateDateCells()
             }
         }
+        
+        delegate?.dataDidUpdate()
     }
 }

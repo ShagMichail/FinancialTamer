@@ -11,9 +11,11 @@ struct MyHistoryView: View {
     @Environment(\.dismiss) private var dismiss
     
     @ObservedObject private var viewModel: MyHistoryViewModel
+    private var analysisViewModel: AnalysisViewModel
     
-    init(viewModel: MyHistoryViewModel) {
+    init(viewModel: MyHistoryViewModel, analysisViewModel: AnalysisViewModel) {
         self.viewModel = viewModel
+        self.analysisViewModel = analysisViewModel
     }
     
     var body: some View {
@@ -84,9 +86,6 @@ struct MyHistoryView: View {
                         )
                     }
                     .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                    .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
-                        return viewDimensions[.listRowSeparatorLeading] + 46
-                    }
                 }
                 
             } header: {
@@ -112,7 +111,11 @@ struct MyHistoryView: View {
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    AnalysisView()
+                    AnalysisViewControllerWrapper(
+                        viewModel: analysisViewModel
+                    )
+                    .navigationBarBackButtonHidden(true)
+                    .ignoresSafeArea()
                 } label: {
                     Image("document")
                         .resizable()
@@ -131,8 +134,4 @@ struct MyHistoryView: View {
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
     }
-}
-
-#Preview {
-    MyHistoryView(viewModel: MyHistoryViewModel(transactionsService: TransactionsService(), categoriesService: CategoriesService(), selectedDirection: .outcome))
 }
