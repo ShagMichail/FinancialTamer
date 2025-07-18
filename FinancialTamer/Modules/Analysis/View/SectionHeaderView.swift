@@ -31,7 +31,6 @@ final class SectionHeaderView: UITableViewHeaderFooterView {
         leadingConstraint = titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0)
         bottomConstraint = titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
         
-        // сделал здесь не через SnapKit, так как пока не понял как правильно прихранить констрейты, используя его
         NSLayoutConstraint.activate([
             leadingConstraint,
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),

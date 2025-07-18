@@ -7,36 +7,36 @@
 
 import Foundation
 
-final class BankAccountsService {
-    private var mockAccounts: [BankAccount] = [
-        BankAccount(
-            id: 1,
-            userId: 1,
-            name: "Основной счет",
-            balance: Decimal(10000),
-            currency: "RUB",
-            createdAt: Date(),
-            updatedAt: Date()
-        )
-    ]
+protocol BankAccountsServiceProtocol {
+    func getAccount() async throws -> BankAccount
+    func updateAccount(_ account: BankAccount) async throws
+}
+
+final class BankAccountsService: BankAccountsServiceProtocol, ObservableObject {
+    static let shared = BankAccountsService()
     
     func getAccount() async throws -> BankAccount {
-        try await Task.sleep(nanoseconds: 500_000_000)
-        guard let account = mockAccounts.first else {
-            throw MockError.accountNotFound
+        let accounts = try await NetworkClient.shared.fetchDecodeData(endpointValue: "api/v1/accounts", dataType: BankAccount.self)
+        guard let first = accounts.first else {
+            throw AccountError.accountNotFound
         }
-        return account
+        return first
     }
     
     func updateAccount(_ account: BankAccount) async throws {
-        try await Task.sleep(nanoseconds: 500_000_000)
-        guard let index = mockAccounts.firstIndex(where: { $0.id == account.id }) else {
-            throw MockError.accountNotFound
-        }
-        mockAccounts[index] = account
+        let updateRequest = AccountUpdateRequest(name: account.name, balance: account.balance, currency: account.currency)
+        let endpoint = "api/v1/accounts/\(account.id)"
+        let encoder = JSONEncoder()
+        let bodyData = try encoder.encode(updateRequest)
+        try await NetworkClient.shared.request(endpointValue: endpoint, method: "PUT", body: bodyData)
     }
     
-    enum MockError: Error {
+    enum AccountError: Error {
         case accountNotFound
+        var errorDescription: String? {
+            switch self {
+            case .accountNotFound: return "Account not found"
+            }
+        }
     }
 }

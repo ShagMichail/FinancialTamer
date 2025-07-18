@@ -127,6 +127,7 @@ struct MyHistoryView: View {
         .task {
             await viewModel.loadData()
         }
+        .errorAlert(errorMessage: $viewModel.errorMessage)
     }
 
     private func dateFormator(date: Date) -> String {

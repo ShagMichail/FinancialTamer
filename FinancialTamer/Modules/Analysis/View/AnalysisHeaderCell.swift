@@ -30,7 +30,6 @@ final class AnalysisHeaderCell: UITableViewCell {
     }()
     
     private lazy var datePicker: UIDatePicker = {
-        // пока не смог настроить, чтобы при нажатии на datePicker текст оставался черным
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .compact

@@ -202,6 +202,9 @@ struct CreateTransactionView: View {
                     comment = transaction.comment
                 }
             }
+            .task {
+                await viewModel.loadAccount()
+            }
         }
     }
 }

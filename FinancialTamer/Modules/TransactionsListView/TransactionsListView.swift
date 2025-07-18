@@ -35,24 +35,27 @@ struct TransactionsListView: View {
                 }
                 
                 Section {
-                    ForEach(viewModel.displayedTransactions.indices, id: \.self) { index in
-                        let transaction = viewModel.displayedTransactions[index]
-                        let category = viewModel.category(for: transaction)
-                        VStack(spacing: 0) {
-                            ListRowView(
-                                emoji: category.map { String($0.emoji) } ?? "❓",
-                                categoryName: category?.name ?? "Не известно",
-                                transactionComment: transaction.comment.count != 0 ? transaction.comment : nil,
-                                transactionAmount: NumberFormatter.currency.string(from: NSDecimalNumber(decimal: transaction.amount)) ?? "",
-                                needChevron: true
-                            )
-                        }
-                        .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                        .onTapGesture {
-                            editingTransaction = transaction
+                    if viewModel.isLoading {
+                        ProgressView()
+                    } else {
+                        ForEach(viewModel.displayedTransactions.indices, id: \.self) { index in
+                            let transaction = viewModel.displayedTransactions[index]
+                            let category = viewModel.category(for: transaction)
+                            VStack(spacing: 0) {
+                                ListRowView(
+                                    emoji: category.map { String($0.emoji) } ?? "❓",
+                                    categoryName: category?.name ?? "Не известно",
+                                    transactionComment: transaction.comment.count != 0 ? transaction.comment : nil,
+                                    transactionAmount: NumberFormatter.currency.string(from: NSDecimalNumber(decimal: transaction.amount)) ?? "",
+                                    needChevron: true
+                                )
+                            }
+                            .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                            .onTapGesture {
+                                editingTransaction = transaction
+                            }
                         }
                     }
-                    
                 } header: {
                     Text("ОПЕРАЦИИ")
                         .font(.system(size: 13, weight: .regular))
@@ -69,5 +72,6 @@ struct TransactionsListView: View {
                 await viewModel.loadTransactions()
             }
         }
+        .errorAlert(errorMessage: $viewModel.errorMessage)
     }
 }

@@ -12,7 +12,7 @@ import OSLog
 final class ArticlesViewModel: ObservableObject {
     @Published var allCategories: [Category] = []
     @Published var isLoading = false
-    @Published var error: Error?
+    @Published var errorMessage: String? = nil
     @Published var searchText: String = ""
     
     var filteredCategories: [Category] {
@@ -35,7 +35,6 @@ final class ArticlesViewModel: ObservableObject {
     
     func loadCategories(direction: Direction? = nil) async {
         isLoading = true
-        error = nil
         
         do {
             let categories: [Category]
@@ -48,7 +47,7 @@ final class ArticlesViewModel: ObservableObject {
             allCategories = categories
             isLoading = false
         } catch {
-            self.error = error
+            errorMessage = error.localizedDescription
             isLoading = false
         }
     }

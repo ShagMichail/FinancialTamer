@@ -7,14 +7,18 @@
 
 import Foundation
 
-enum Direction: String, Codable {
+enum Direction: Codable {
     case income
     case outcome
 }
 
-struct Category: Hashable {
+struct Category: Codable, Hashable {
     let id: Int
     let name: String
-    let emoji: Character
-    let direction: Direction
+    let emoji: String
+    let isIncome: Bool
+    
+    var direction: Direction {
+        return isIncome ? .income : .outcome
+    }
 }
