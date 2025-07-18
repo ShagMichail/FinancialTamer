@@ -31,7 +31,7 @@ final class MyHistoryViewModel: ObservableObject {
     @Published var displayedTransactions: [Transaction] = []
     @Published var categories: [Category] = []
     @Published var isLoading = false
-    @Published var error: Error?
+    @Published var errorMessage: String? = nil
     @Published var sortType: SortType = .date
     
     @Published var startDate: Date = {
@@ -85,7 +85,7 @@ final class MyHistoryViewModel: ObservableObject {
             filterTransactions()
             self.totalAmount = calculateTotalAmount()
         } catch {
-            self.error = error
+            errorMessage = error.localizedDescription
             os_log("Ошибка загрузки: %@", log: .default, type: .error, error.localizedDescription)
         }
     }

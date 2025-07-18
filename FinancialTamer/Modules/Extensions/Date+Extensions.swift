@@ -25,3 +25,26 @@ extension Date {
         return DateInterval(start: start, end: end)
     }
 }
+
+extension Date {
+    func convertToUTC() -> Date {
+        let secondsFromGMT = TimeZone.current.secondsFromGMT(for: self)
+        return self.addingTimeInterval(-TimeInterval(secondsFromGMT))
+    }
+    
+    func convertFromUTCToLocal() -> Date {
+        let timeZone = TimeZone.current
+        let secondsFromGMT = timeZone.secondsFromGMT(for: self)
+        return self.addingTimeInterval(TimeInterval(-secondsFromGMT))
+    }
+}
+
+extension DateFormatter {
+    static let withFractionalSeconds: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXXXX"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter
+    }()
+}

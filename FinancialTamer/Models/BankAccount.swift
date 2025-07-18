@@ -7,12 +7,25 @@
 
 import Foundation
 
-struct BankAccount {
+struct BankAccount: Codable {
     let id: Int
     let userId: Int
     let name: String
-    let balance: Decimal
+    var balance: String
+    var currency: String
+    let createdAt: String
+    let updatedAt: String
+}
+
+struct AccountBrief: Codable {
+    let id: Int
+    let name: String
+    let balance: String
     let currency: String
-    let createdAt: Date
-    let updatedAt: Date
+}
+
+struct AccountUpdateRequest: Codable {
+    let name: String
+    let balance: String
+    let currency: String
 }

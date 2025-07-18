@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Transaction: Identifiable {
+struct Transaction: Identifiable, Encodable, Decodable {
     let id: Int
     let accountId: Int
     let categoryId: Int
@@ -211,4 +211,53 @@ extension Transaction {
             parse(csvString: line)
         }
     }
+}
+
+struct TransactionResponse: Codable {
+    let id: Int
+    let account: AccountBrief
+    let category: Category
+    let amount: String
+    let transactionDate: Date
+    let comment: String?
+    let createdAt: Date
+    let updatedAt: Date
+
+    func toTransaction() -> Transaction? {
+        return toTransaction(with: transactionDate)
+    }
+
+    func toTransaction(with date: Date) -> Transaction? {
+        let cleanedAmount = amount.replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: ",", with: ".")
+
+        guard let amountDecimal = Decimal(string: cleanedAmount) else {
+            print("Failed to convert amount string '\(amount)' to Decimal")
+            return nil
+        }
+
+        guard !amountDecimal.isNaN else {
+            print("Amount is NaN: \(amount)")
+            return nil
+        }
+
+        return Transaction(
+            id: id,
+            accountId: account.id,
+            categoryId: category.id,
+            amount: amountDecimal,
+            transactionDate: date,
+            comment: comment ?? "",
+            createdAt: createdAt,
+            updatedAt: updatedAt
+        )
+    }
+}
+
+struct TransactionRequest: Codable {
+    let accountId: Int
+    let categoryId: Int
+    let amount: String
+    let transactionDate: String
+    let comment: String
 }

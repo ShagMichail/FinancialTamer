@@ -14,7 +14,7 @@ final class TransactionsViewModel: ObservableObject {
     @Published var allTransactions: [Transaction] = []
     @Published var categories: [Category] = []
     @Published var isLoading = false
-    @Published var error: Error?
+    @Published var errorMessage: String? = nil
     @Published var selectedDirection: Direction = .outcome {
         didSet {
             filterTransactions()
@@ -25,9 +25,7 @@ final class TransactionsViewModel: ObservableObject {
     private let categoriesService: CategoriesService
     
     var totalAmountToday: String {
-        let todayInterval = Date.todayInterval()
-        let todayTransactions = displayedTransactions.filter { todayInterval.contains($0.transactionDate) }
-        let total = todayTransactions.reduce(0) { $0 + $1.amount }
+        let total = displayedTransactions.reduce(0) { $0 + $1.amount }
         return NumberFormatter.currency.string(from: NSDecimalNumber(decimal: total)) ?? "0 ₽"
     }
     
@@ -51,6 +49,7 @@ final class TransactionsViewModel: ObservableObject {
             self.categories = loadedCategories
             filterTransactions()
         } catch {
+            errorMessage = error.localizedDescription
             os_log("Ошибка загрузки: %@", log: .default, type: .error, error.localizedDescription)
         }
     }
@@ -64,7 +63,7 @@ final class TransactionsViewModel: ObservableObject {
             try await transactionsService.createTransaction(transaction)
             await loadTransactions()
         } catch {
-            self.error = error
+            errorMessage = error.localizedDescription
             os_log("Ошибка создания транзакции: %@", log: .default, type: .error, error.localizedDescription)
         }
     }
@@ -74,15 +73,19 @@ final class TransactionsViewModel: ObservableObject {
             try await transactionsService.deleteTransaction(withId: id)
             await loadTransactions()
         } catch {
-            self.error = error
+            errorMessage = error.localizedDescription
             os_log("Ошибка удаления транзакции: %@", log: .default, type: .error, error.localizedDescription)
         }
     }
     
     private func filterTransactions() {
-        displayedTransactions = allTransactions.filter { transaction in
-            guard let category = category(for: transaction) else { return false }
-            return category.direction == selectedDirection
-        }
+        let todayInterval = Date.todayInterval()
+        displayedTransactions = allTransactions
+            .filter {
+                transaction in
+                guard let category = category(for: transaction) else { return false }
+                return category.direction == selectedDirection
+            }
+            .filter { todayInterval.contains($0.transactionDate) }
     }
 }

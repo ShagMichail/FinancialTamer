@@ -85,8 +85,12 @@ struct ScoreView: View {
                     .listRowBackground(stateScreen == .edit ? Color.accentColor : Color.white)
                     .onChange(of: isFocused) { _, focused in
                         if !focused && isEditing {
-                            viewModel.setBalance(tempBalance)
-                            isEditing = false
+                            viewModel.displayBalance = tempBalance
+                            Task {
+                                await viewModel.setBalance(tempBalance)
+                                await viewModel.loadBalance()
+                                isEditing = false
+                            }
                         }
                     }
                 } header: {
@@ -163,6 +167,7 @@ struct ScoreView: View {
                     spoilerVisible.toggle()
                 }
             }
+            .errorAlert(errorMessage: $viewModel.errorMessage)
         }
     }
 }

@@ -61,6 +61,7 @@ struct ArticlesView: View {
             .refreshable {
                 await viewModel.loadCategories()
             }
+            .errorAlert(errorMessage: $viewModel.errorMessage)
         }
     }
 }
